@@ -1,7 +1,7 @@
 def call() {
     pipeline {
         agent any
-        // stages {
+        stages {
         //     stage('Git Checkout') {
         //         steps {
         //             script {
