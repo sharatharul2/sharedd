@@ -2,13 +2,13 @@ def call() {
     pipeline {
         agent any
         stages {
-        //     stage('Git Checkout') {
-        //         steps {
-        //             script {
-        //                 git branch: 'node-dev', url: 'https://github.com/sharatharul2/multi-branch.git' //project-repo
-        //             }
-        //         }
-        //     }
+            stage('Git Checkout') {
+                steps {
+                    script {
+                        git branch: 'node-dev', url: 'https://github.com/sharatharul2/multi-branch.git' //project-repo
+                    }
+                }
+            }
             stage ('Build') {
                 steps {
                     script {
@@ -35,17 +35,17 @@ def call() {
                     }
                 }
             }
-            // stage('Docker Push') {
-            //     steps {
-            //         script {
-            //             withCredentials([string(credentialsId: 'dockerPass', variable: 'dockerPassword')]) {
-            //                 sh "docker login -u naresh2603 -p ${dockerPassword}"
-            //                 sh 'docker push naresh2603/multi:v2'
-            //                 sh 'docker rmi naresh2603/multi:v2'
-            //             }
-            //         }
-            //     }
-            // }
+            stage('Docker Push') {
+                steps {
+                    script {
+                        withCredentials([string(credentialsId: 'dockerPass', variable: 'dockerPassword')]) {
+                            sh "docker login -u naresh2603 -p ${dockerPassword}"
+                            sh 'docker push naresh2603/multi:v2'
+                            sh 'docker rmi naresh2603/multi:v2'
+                        }
+                    }
+                }
+            }
             // stage('Deploy on k8s') {
             //     steps {
             //         script {
